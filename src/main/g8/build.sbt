@@ -1,9 +1,11 @@
 organization := "$package$"
 name := "$name;format="lower,hyphen"$"
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.7"
 
 enablePlugins(ScalaJSPlugin)
-scalaJSModuleKind := ModuleKind.CommonJSModule
+scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) }
+
+libraryDependencies += "io.scalajs.npm" %%% "express" %%% "0.4.2"
 
 InputKey[Unit]("gcDeploy") := {
   val args = sbt.complete.DefaultParsers.spaceDelimited("gcDeploy <project-id> [<pubsub-topic>]").parsed
